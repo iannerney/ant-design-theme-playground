@@ -72,10 +72,14 @@ const SeedTokensForm: React.FC<SeedTokensFormProps> = ({ customizableTheme, setC
         const definedValues = Object.fromEntries(Object.entries(allValues).filter(([key, value]) => value !== undefined));
 
         // Convert ColorFactory objects to hex strings
-        const convertedValues = Object.entries(definedValues).reduce((acc, [key, value]) => {
+        const convertedValues: ThemeConfig["token"] = Object.entries(definedValues).reduce((acc, [key, value]) => {
             if (typeof value === "object" && value !== null && "toHexString" in value) {
+                // TODO: Fix this type assertion
+                // @ts-ignore
                 acc[key] = (value as ColorFactory).toHexString();
             } else {
+                // TODO: Fix this type assertion
+                // @ts-ignore
                 acc[key] = value;
             }
             return acc;
