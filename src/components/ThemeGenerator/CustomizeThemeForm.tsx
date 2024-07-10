@@ -1,16 +1,17 @@
 "use client";
 import React, { useState } from "react";
 import { Typography, Collapse } from "antd";
-import type { CollapseProps } from "antd";
+import type { CollapseProps, ThemeConfig } from "antd";
 import SeedTokensForm from "./SeedTokensForm";
 
 const { Title } = Typography;
 
 interface CustomizeThemeFormProps {
-    // Add any props you need here
+    customizableTheme: ThemeConfig;
+    setCustomizableTheme: React.Dispatch<React.SetStateAction<ThemeConfig>>;
 }
 
-const CustomizeThemeForm: React.FC<CustomizeThemeFormProps> = () => {
+const CustomizeThemeForm: React.FC<CustomizeThemeFormProps> = ({ customizableTheme, setCustomizableTheme }) => {
     const text = `
     A dog is a type of domesticated animal.
     Known for its loyalty and faithfulness,
@@ -21,7 +22,7 @@ const CustomizeThemeForm: React.FC<CustomizeThemeFormProps> = () => {
         {
             key: "1",
             label: "Seed Tokens",
-            children: <SeedTokensForm />,
+            children: <SeedTokensForm customizableTheme={customizableTheme} setCustomizableTheme={setCustomizableTheme} />,
         },
         {
             key: "2",

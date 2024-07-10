@@ -1,8 +1,7 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useState, useReducer } from "react";
 import { Breadcrumb, Layout, Menu, theme, Row, Col, Typography, Flex, Button, Card, Statistic, Alert, Tooltip, ConfigProvider } from "antd";
 import { ArrowDownOutlined, ArrowUpOutlined, QuestionCircleOutlined } from "@ant-design/icons";
-import useAntDesignTheme from "@/hooks/useAntDesignTheme";
 
 const { Header, Content, Footer } = Layout;
 const { Title, Paragraph } = Typography;
@@ -12,21 +11,13 @@ const items = new Array(4).fill(null).map((_, index) => ({
     label: `nav ${index + 1}`,
 }));
 
-const PreviewPanel: React.FC = () => {
-    const {
-        token: { green, red },
-    } = theme.useToken();
+interface PreviewPanelProps {
+    customizableTheme: any;
+}
 
-    const { customizableTheme } = useAntDesignTheme();
-
-    useEffect(() => {
-        if (customizableTheme) {
-            console.log("customizableTheme", customizableTheme);
-        }
-    }, [customizableTheme]);
-
+const PreviewPanel: React.FC<PreviewPanelProps> = ({ customizableTheme }) => {
     return (
-        <ConfigProvider theme={customizableTheme}>
+        <ConfigProvider theme={{ ...customizableTheme, components: { Layout: {} } }}>
             <Layout>
                 <Header style={{ display: "flex", alignItems: "center" }}>
                     <div className="demo-logo" />
@@ -82,7 +73,7 @@ const PreviewPanel: React.FC = () => {
                                         value={11.28}
                                         precision={2}
                                         // Color is set here using the `green` token
-                                        valueStyle={{ color: green }}
+                                        valueStyle={{ color: customizableTheme.token.green }}
                                         prefix={<ArrowUpOutlined />}
                                         suffix="%"
                                     />
@@ -108,7 +99,7 @@ const PreviewPanel: React.FC = () => {
                                         }
                                         value={9.3}
                                         precision={2}
-                                        valueStyle={{ color: red }}
+                                        valueStyle={{ color: customizableTheme.token.red }}
                                         prefix={<ArrowDownOutlined />}
                                         suffix="%"
                                     />

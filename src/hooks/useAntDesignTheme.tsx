@@ -1,5 +1,4 @@
 "use client";
-import { useState } from "react";
 import { ThemeConfig, theme } from "antd";
 
 const useAntDesignTheme = () => {
@@ -8,27 +7,18 @@ const useAntDesignTheme = () => {
         // Seed Tokens: https://ant.design/docs/react/customize-theme#seedtoken
         token: {
             colorPrimary: "#328677", // Clark Green
+            colorBgBase: "#ffffff", // White
         },
 
         // Preset Algorithms: https://ant.design/docs/react/customize-theme#use-preset-algorithms
         algorithm: theme.defaultAlgorithm,
 
         // Component Tokens: https://ant.design/docs/react/customize-theme#customize-component-token
-        components: {
-            Layout: {
-                headerBg: "#328677", // Clark Green
-                headerColor: "#ffffff",
-                bodyBg: "#ffffff",
-            },
-        },
+        components: {},
     };
-
-    const [customizableTheme, setCustomizableTheme] = useState(theme.defaultConfig);
 
     return {
         initialTheme,
-        customizableTheme,
-        setCustomizableTheme,
     };
 };
 

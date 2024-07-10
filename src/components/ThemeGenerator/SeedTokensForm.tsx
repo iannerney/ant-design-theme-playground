@@ -1,17 +1,17 @@
 "use client";
-import React from "react";
-import useAntDesignTheme from "@/hooks/useAntDesignTheme";
-import { Form, Row, Col, ColorPicker, Input, InputNumber, Switch } from "antd";
-import { SeedToken } from "antd/es/theme/internal";
-import { ColorValueType } from "antd/es/color-picker/interface";
+import React, { useState } from "react";
+import { Form, Row, Col, ColorPicker, Input, InputNumber, Switch, ThemeConfig } from "antd";
+import type { SeedToken } from "antd/es/theme/internal";
+import type { ColorFactory } from "antd/es/color-picker/color";
 
 interface SeedTokensFormProps {
-    // onSubmit: (seed: string) => void;
+    customizableTheme: ThemeConfig;
+    setCustomizableTheme: React.Dispatch<React.SetStateAction<ThemeConfig>>;
 }
 
-const SeedTokensForm: React.FC<SeedTokensFormProps> = (props) => {
+const SeedTokensForm: React.FC<SeedTokensFormProps> = ({ customizableTheme, setCustomizableTheme }) => {
     // Generate array of SeedToken properties
-    type SeedTokenObject = Record<keyof SeedToken, undefined>;
+    type SeedTokenObject = Record<keyof SeedToken, undefined> & { [key: string]: undefined };
     let seedTokenProperties: SeedTokenObject = {
         colorPrimary: undefined,
         colorSuccess: undefined,
@@ -62,15 +62,32 @@ const SeedTokensForm: React.FC<SeedTokensFormProps> = (props) => {
     };
     const allSeedTokenProperties = Object.keys(seedTokenProperties) as (keyof SeedToken)[];
 
-    const { customizableTheme, setCustomizableTheme } = useAntDesignTheme();
-
     const handleOnFieldsChange = (changedFields: any, allFields: any) => {
-        console.log("onFieldsChange", { changedFields, allFields });
+        // TODO: I don't believe this is necessary, so I'm leaving it empty for now
+        return null;
     };
 
     const handleOnValuesChange = (changedValues: any, allValues: any) => {
-        console.log("onValuesChange", { changedValues, allValues });
-        // TODO: Use this to update the state and maintain an exportable theme object
+        // Filter out undefined values
+        const definedValues = Object.fromEntries(Object.entries(allValues).filter(([key, value]) => value !== undefined));
+
+        // Convert ColorFactory objects to hex strings
+        const convertedValues = Object.entries(definedValues).reduce((acc, [key, value]) => {
+            if (typeof value === "object" && value !== null && "toHexString" in value) {
+                acc[key] = (value as ColorFactory).toHexString();
+            } else {
+                acc[key] = value;
+            }
+            return acc;
+        }, {});
+
+        setCustomizableTheme({
+            ...customizableTheme,
+            token: {
+                ...customizableTheme.token,
+                ...convertedValues,
+            },
+        });
     };
 
     if (customizableTheme.token && allSeedTokenProperties.length > 0) {
@@ -85,13 +102,13 @@ const SeedTokensForm: React.FC<SeedTokensFormProps> = (props) => {
             >
                 <Row gutter={[24, 12]}>
                     {allSeedTokenProperties.map((property) => {
-                        let type = typeof customizableTheme.token[property];
-                        let value = customizableTheme.token[property];
+                        let type = typeof customizableTheme.token?.[property];
+                        let value = customizableTheme.token?.[property] ?? null;
 
                         const renderFormItem = () => {
                             if (type === "string") {
-                                if (value.toString().startsWith("#") || property.startsWith("color")) {
-                                    return <ColorPicker defaultValue={value as string} showText />;
+                                if (value?.toString().startsWith("#") || property.startsWith("color")) {
+                                    return <ColorPicker defaultValue={value as string} defaultFormat="hex" format="hex" showText disabledAlpha />;
                                 } else {
                                     return <Input defaultValue={value as string} />;
                                 }
