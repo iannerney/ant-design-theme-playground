@@ -25,11 +25,16 @@ const CustomizeThemeForm: React.FC<CustomizeThemeFormProps> = () => {
         },
         {
             key: "2",
-            label: "Map Tokens",
+            label: "Algorithm",
             children: <p>{text}</p>,
         },
         {
             key: "3",
+            label: "Map Tokens",
+            children: <p>{text}</p>,
+        },
+        {
+            key: "4",
             label: "Alias Tokens",
             children: <p>{text}</p>,
         },
@@ -37,7 +42,7 @@ const CustomizeThemeForm: React.FC<CustomizeThemeFormProps> = () => {
 
     return (
         <>
-            <Title level={2}>Customize Your Design Tokens</Title>
+            <Title level={2}>Customize Your Theme</Title>
             <Collapse items={sections} defaultActiveKey={["1"]} />
         </>
     );

@@ -12,7 +12,7 @@ const AntDesignLayout: React.FC<AntDesignLayoutProps> = ({ children }) => {
     return (
         <Layout>
             <Header>
-                <h1>Ant Design Theme Generator</h1>
+                <h1>Ant Design Theme Playground</h1>
             </Header>
             <Content>{children}</Content>
             <Footer>© {year === 2024 ? year : `2024-${year}`} Ian Nerney</Footer>
