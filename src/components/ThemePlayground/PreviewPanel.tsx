@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState, useReducer } from "react";
-import { Breadcrumb, Layout, Menu, theme, Row, Col, Typography, Flex, Button, Card, Statistic, Alert, Tooltip, ConfigProvider, Modal, Space, notification, Tag } from "antd";
+import { Breadcrumb, Layout, Menu, theme, Row, Col, Typography, Flex, Button, Card, Statistic, Alert, Tooltip, ConfigProvider, Modal, Space, notification, Tag, Image } from "antd";
 import { ArrowDownOutlined, ArrowUpOutlined, QuestionCircleOutlined } from "@ant-design/icons";
 
 const { Header, Content, Footer } = Layout;
@@ -169,6 +169,10 @@ const PreviewPanel: React.FC<PreviewPanelProps> = ({ customizableTheme }) => {
                             <Tag color="geekblue">geekblue</Tag>
                             <Tag color="purple">purple</Tag>
                         </Flex>
+                    </section>
+                    <section id="images">
+                        <Title level={2}>Images</Title>
+                        <Image width={200} src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png" />
                     </section>
                 </Content>
                 <Footer style={{ textAlign: "center" }}>©{new Date().getFullYear()} Your Name</Footer>
