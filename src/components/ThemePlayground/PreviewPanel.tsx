@@ -1,10 +1,11 @@
 "use client";
 import React, { useEffect, useState, useReducer } from "react";
-import { Breadcrumb, Layout, Menu, theme, Row, Col, Typography, Flex, Button, Card, Statistic, Alert, Tooltip, ConfigProvider } from "antd";
+import { Breadcrumb, Layout, Menu, theme, Row, Col, Typography, Flex, Button, Card, Statistic, Alert, Tooltip, ConfigProvider, Modal, Space, notification, Tag } from "antd";
 import { ArrowDownOutlined, ArrowUpOutlined, QuestionCircleOutlined } from "@ant-design/icons";
 
 const { Header, Content, Footer } = Layout;
 const { Title, Paragraph } = Typography;
+type NotificationType = "success" | "info" | "warning" | "error";
 
 const items = new Array(4).fill(null).map((_, index) => ({
     key: index + 1,
@@ -16,6 +17,25 @@ interface PreviewPanelProps {
 }
 
 const PreviewPanel: React.FC<PreviewPanelProps> = ({ customizableTheme }) => {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const handleModalOpen = () => {
+        setIsModalOpen(true);
+    };
+
+    const handleModalClose = () => {
+        setIsModalOpen(false);
+    };
+
+    const [api, contextHolder] = notification.useNotification();
+
+    const openNotificationWithIcon = (type: NotificationType) => {
+        api[type]({
+            message: "Notification Title",
+            description: "This is the content of the notification. This is the content of the notification. This is the content of the notification.",
+        });
+    };
+
     return (
         // NOTE: The Layout comonent is added to the theme to override the parent theme component definition
         <ConfigProvider theme={{ ...customizableTheme, components: { Layout: {} } }}>
@@ -42,7 +62,7 @@ const PreviewPanel: React.FC<PreviewPanelProps> = ({ customizableTheme }) => {
                                 </Paragraph>
                                 <Flex gap="small" wrap>
                                     <Button size="large">Let's Go!</Button>
-                                    <Button type="primary" size="large">
+                                    <Button type="primary" size="large" onClick={handleModalOpen}>
                                         Let's GOOOOO!
                                     </Button>
                                 </Flex>
@@ -53,8 +73,8 @@ const PreviewPanel: React.FC<PreviewPanelProps> = ({ customizableTheme }) => {
                     <section id="statistics">
                         <Title level={2}>Statistics</Title>
                         <Row gutter={16}>
-                            <Col span={12}>
-                                <Card bordered={false}>
+                            <Col xs={24} lg={12}>
+                                <Card style={{ margin: "12px 0" }} bordered={false}>
                                     <Statistic
                                         title={
                                             <>
@@ -80,8 +100,8 @@ const PreviewPanel: React.FC<PreviewPanelProps> = ({ customizableTheme }) => {
                                     />
                                 </Card>
                             </Col>
-                            <Col span={12}>
-                                <Card bordered={false}>
+                            <Col xs={24} lg={12}>
+                                <Card style={{ margin: "12px 0" }} bordered={false}>
                                     <Statistic
                                         title={
                                             <>
@@ -109,7 +129,7 @@ const PreviewPanel: React.FC<PreviewPanelProps> = ({ customizableTheme }) => {
                         </Row>
                     </section>
                     <section id="alerts">
-                        <Title level={2}>Some Alerts</Title>
+                        <Title level={2}>Alerts</Title>
                         <Row>
                             <Col span={24}>
                                 <Alert message="Success Tips" type="success" showIcon />
@@ -122,9 +142,42 @@ const PreviewPanel: React.FC<PreviewPanelProps> = ({ customizableTheme }) => {
                             </Col>
                         </Row>
                     </section>
+                    <section id="notifications">
+                        <Title level={2}>Notifications</Title>
+                        {contextHolder}
+                        <Space>
+                            <Button onClick={() => openNotificationWithIcon("success")}>Success</Button>
+                            <Button onClick={() => openNotificationWithIcon("info")}>Info</Button>
+                            <Button onClick={() => openNotificationWithIcon("warning")}>Warning</Button>
+                            <Button onClick={() => openNotificationWithIcon("error")}>Error</Button>
+                        </Space>
+                    </section>
+                    <section id="tags">
+                        <Title level={2}>Tags</Title>
+                        <Flex gap="4px 0" wrap>
+                            <Tag color="magenta">magenta</Tag>
+                            <Tag color="pink">pink</Tag>
+                            <Tag color="red">red</Tag>
+                            <Tag color="volcano">volcano</Tag>
+                            <Tag color="orange">orange</Tag>
+                            <Tag color="gold">gold</Tag>
+                            <Tag color="yellow">yellow</Tag>
+                            <Tag color="lime">lime</Tag>
+                            <Tag color="green">green</Tag>
+                            <Tag color="cyan">cyan</Tag>
+                            <Tag color="blue">blue</Tag>
+                            <Tag color="geekblue">geekblue</Tag>
+                            <Tag color="purple">purple</Tag>
+                        </Flex>
+                    </section>
                 </Content>
                 <Footer style={{ textAlign: "center" }}>©{new Date().getFullYear()} Your Name</Footer>
             </Layout>
+            <Modal title="Basic Modal" open={isModalOpen} onOk={handleModalClose} onCancel={handleModalClose}>
+                <p>Some contents...</p>
+                <p>Some contents...</p>
+                <p>Some contents...</p>
+            </Modal>
         </ConfigProvider>
     );
 };
