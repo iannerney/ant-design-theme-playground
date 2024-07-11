@@ -46,10 +46,10 @@ const AlgorithmForm: React.FC<AlgorithmFormProps> = ({ customizableTheme, setCus
         });
     };
     return (
-        <Form labelCol={{ span: 24 }} wrapperCol={{ span: 24 }} layout="vertical" style={{ maxWidth: 600 }} onValuesChange={handleOnValuesChange}>
+        <Form labelCol={{ span: 24 }} wrapperCol={{ span: 24 }} layout="vertical" onValuesChange={handleOnValuesChange}>
             <Row gutter={[24, 12]}>
                 {switches.map((switchItem, i) => (
-                    <Col xs={24} lg={12} xl={8} key={i}>
+                    <Col xs={24} sm={12} xl={8} key={i}>
                         <Form.Item label={switchItem.label} name={switchItem.key}>
                             <Switch checkedChildren="true" unCheckedChildren="false" />
                         </Form.Item>

@@ -22,7 +22,7 @@ const SeedTokensForm: React.FC<SeedTokensFormProps> = ({ customizableTheme, setC
         colorTextBase: undefined,
         colorBgBase: undefined,
         colorLink: undefined,
-        fontFamily: undefined,
+        fontFamily: undefined, // TODO: Make font family selections SFPro, Inter
         fontFamilyCode: undefined,
         fontSize: undefined,
         lineWidth: undefined,
@@ -92,7 +92,7 @@ const SeedTokensForm: React.FC<SeedTokensFormProps> = ({ customizableTheme, setC
 
     if (customizableTheme.token && allSeedTokenProperties.length > 0) {
         return (
-            <Form labelCol={{ span: 24 }} wrapperCol={{ span: 24 }} layout="vertical" style={{ maxWidth: 600 }} onValuesChange={handleOnValuesChange}>
+            <Form labelCol={{ span: 24 }} wrapperCol={{ span: 24 }} layout="vertical" onValuesChange={handleOnValuesChange}>
                 <Row gutter={[24, 12]}>
                     {allSeedTokenProperties.map((property) => {
                         let type = typeof customizableTheme.token?.[property];
@@ -113,7 +113,7 @@ const SeedTokensForm: React.FC<SeedTokensFormProps> = ({ customizableTheme, setC
                         };
 
                         return (
-                            <Col xs={24} lg={12} xl={8} key={property}>
+                            <Col xs={24} sm={12} xl={8} key={property}>
                                 <Form.Item label={property} name={property}>
                                     {renderFormItem()}
                                 </Form.Item>
