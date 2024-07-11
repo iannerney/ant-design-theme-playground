@@ -46,37 +46,17 @@ const AlgorithmForm: React.FC<AlgorithmFormProps> = ({ customizableTheme, setCus
         });
     };
     return (
-        <>
-            <Paragraph>The Algorithm defines how the "Seed Token" variables get converted into "Map Tokens", which are then used in Ant Design components.</Paragraph>
-            <Paragraph>
-                There are three possible options:
-                <ol>
-                    <li>
-                        <code>defaultAlgorithm</code> which is the default light mode
-                    </li>
-                    <li>
-                        <code>darkAlgorithm</code> which is dark mode
-                    </li>
-                    <li>
-                        <code>compactAlgorithm</code> which has smaller sizing
-                    </li>
-                </ol>
-            </Paragraph>
-            <Paragraph>
-                The <code>compactAlgorithm</code> can be combined with either the <code>defaultAlgorithm</code> or the <code>darkAlgorithm</code>.
-            </Paragraph>
-            <Form labelCol={{ span: 24 }} wrapperCol={{ span: 24 }} layout="vertical" style={{ maxWidth: 600 }} onValuesChange={handleOnValuesChange}>
-                <Row gutter={[24, 12]}>
-                    {switches.map((switchItem, i) => (
-                        <Col xs={24} lg={12} xl={8} key={i}>
-                            <Form.Item label={switchItem.label} name={switchItem.key}>
-                                <Switch checkedChildren="true" unCheckedChildren="false" />
-                            </Form.Item>
-                        </Col>
-                    ))}
-                </Row>
-            </Form>
-        </>
+        <Form labelCol={{ span: 24 }} wrapperCol={{ span: 24 }} layout="vertical" style={{ maxWidth: 600 }} onValuesChange={handleOnValuesChange}>
+            <Row gutter={[24, 12]}>
+                {switches.map((switchItem, i) => (
+                    <Col xs={24} lg={12} xl={8} key={i}>
+                        <Form.Item label={switchItem.label} name={switchItem.key}>
+                            <Switch checkedChildren="true" unCheckedChildren="false" />
+                        </Form.Item>
+                    </Col>
+                ))}
+            </Row>
+        </Form>
     );
 };
 

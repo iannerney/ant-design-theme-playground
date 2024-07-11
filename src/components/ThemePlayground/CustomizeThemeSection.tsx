@@ -4,6 +4,8 @@ import { Typography, Collapse } from "antd";
 import type { CollapseProps, ThemeConfig } from "antd";
 import SeedTokensForm from "./SeedTokensForm";
 import AlgorithmForm from "./AlgorithmForm";
+import SeedTokensModal from "./SeedTokensModal";
+import AlgorithmModal from "./AlgorithmModal";
 
 const { Title } = Typography;
 
@@ -14,9 +16,7 @@ interface CustomizeThemeSectionProps {
 
 const CustomizeThemeSection: React.FC<CustomizeThemeSectionProps> = ({ customizableTheme, setCustomizableTheme }) => {
     const text = `
-    A dog is a type of domesticated animal.
-    Known for its loyalty and faithfulness,
-    it can be found as a welcome guest in many households across the world.
+    Content coming soon...
     `;
 
     const sections: CollapseProps["items"] = [
@@ -24,22 +24,29 @@ const CustomizeThemeSection: React.FC<CustomizeThemeSectionProps> = ({ customiza
             key: "1",
             label: "Algorithm",
             children: <AlgorithmForm customizableTheme={customizableTheme} setCustomizableTheme={setCustomizableTheme} />,
+            extra: <AlgorithmModal />,
         },
         {
             key: "2",
             label: "Seed Tokens",
             children: <SeedTokensForm customizableTheme={customizableTheme} setCustomizableTheme={setCustomizableTheme} />,
+            extra: <SeedTokensModal />,
         },
-        // {
-        //     key: "3",
-        //     label: "Map Tokens",
-        //     children: <p>{text}</p>,
-        // },
-        // {
-        //     key: "4",
-        //     label: "Alias Tokens",
-        //     children: <p>{text}</p>,
-        // },
+        {
+            key: "3",
+            label: "Map Tokens",
+            children: <p>{text}</p>,
+        },
+        {
+            key: "4",
+            label: "Alias Tokens",
+            children: <p>{text}</p>,
+        },
+        {
+            key: "5",
+            label: "Component Tokens",
+            children: <p>{text}</p>,
+        },
     ];
 
     return (
