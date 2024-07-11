@@ -1,9 +1,10 @@
 "use client";
 import React, { useState } from "react";
-import { Form, Row, Col, ColorPicker, Input, InputNumber, Switch, ThemeConfig } from "antd";
+import { Form, Row, Col, ColorPicker, Input, InputNumber, Switch, ThemeConfig, Typography } from "antd";
 import type { SeedToken } from "antd/es/theme/internal";
 import type { ColorFactory } from "antd/es/color-picker/color";
 
+const { Paragraph } = Typography;
 interface SeedTokensFormProps {
     customizableTheme: ThemeConfig;
     setCustomizableTheme: React.Dispatch<React.SetStateAction<ThemeConfig>>;
@@ -62,11 +63,6 @@ const SeedTokensForm: React.FC<SeedTokensFormProps> = ({ customizableTheme, setC
     };
     const allSeedTokenProperties = Object.keys(seedTokenProperties) as (keyof SeedToken)[];
 
-    const handleOnFieldsChange = (changedFields: any, allFields: any) => {
-        // TODO: I don't believe this is necessary, so I'm leaving it empty for now
-        return null;
-    };
-
     const handleOnValuesChange = (changedValues: any, allValues: any) => {
         // Filter out undefined values
         const definedValues = Object.fromEntries(Object.entries(allValues).filter(([key, value]) => value !== undefined));
@@ -96,43 +92,42 @@ const SeedTokensForm: React.FC<SeedTokensFormProps> = ({ customizableTheme, setC
 
     if (customizableTheme.token && allSeedTokenProperties.length > 0) {
         return (
-            <Form
-                labelCol={{ span: 24 }}
-                wrapperCol={{ span: 24 }}
-                layout="vertical"
-                style={{ maxWidth: 600 }}
-                onFieldsChange={handleOnFieldsChange}
-                onValuesChange={handleOnValuesChange}
-            >
-                <Row gutter={[24, 12]}>
-                    {allSeedTokenProperties.map((property) => {
-                        let type = typeof customizableTheme.token?.[property];
-                        let value = customizableTheme.token?.[property] ?? null;
+            <>
+                <Paragraph>
+                    Seed Tokens define the core attributes of the design system, such as colors, spacing, typography, and other stylistic properties. Using Seed Tokens ensures
+                    consistency and scalability across the user interface components.
+                </Paragraph>
+                <Form labelCol={{ span: 24 }} wrapperCol={{ span: 24 }} layout="vertical" style={{ maxWidth: 600 }} onValuesChange={handleOnValuesChange}>
+                    <Row gutter={[24, 12]}>
+                        {allSeedTokenProperties.map((property) => {
+                            let type = typeof customizableTheme.token?.[property];
+                            let value = customizableTheme.token?.[property] ?? null;
 
-                        const renderFormItem = () => {
-                            if (type === "string") {
-                                if (value?.toString().startsWith("#") || property.startsWith("color")) {
-                                    return <ColorPicker defaultValue={value as string} defaultFormat="hex" format="hex" showText disabledAlpha />;
-                                } else {
-                                    return <Input defaultValue={value as string} />;
+                            const renderFormItem = () => {
+                                if (type === "string") {
+                                    if (value?.toString().startsWith("#") || property.startsWith("color")) {
+                                        return <ColorPicker defaultValue={value as string} defaultFormat="hex" format="hex" showText disabledAlpha />;
+                                    } else {
+                                        return <Input defaultValue={value as string} />;
+                                    }
+                                } else if (type === "number") {
+                                    return <InputNumber defaultValue={value as number} />;
+                                } else if (type === "boolean") {
+                                    return <Switch checkedChildren="true" unCheckedChildren="false" defaultChecked={value as boolean} />;
                                 }
-                            } else if (type === "number") {
-                                return <InputNumber defaultValue={value as number} />;
-                            } else if (type === "boolean") {
-                                return <Switch checkedChildren="true" unCheckedChildren="false" defaultChecked={value as boolean} />;
-                            }
-                        };
+                            };
 
-                        return (
-                            <Col xs={24} lg={12} xl={8} key={property}>
-                                <Form.Item label={property} name={property}>
-                                    {renderFormItem()}
-                                </Form.Item>
-                            </Col>
-                        );
-                    })}
-                </Row>
-            </Form>
+                            return (
+                                <Col xs={24} lg={12} xl={8} key={property}>
+                                    <Form.Item label={property} name={property}>
+                                        {renderFormItem()}
+                                    </Form.Item>
+                                </Col>
+                            );
+                        })}
+                    </Row>
+                </Form>
+            </>
         );
     }
 };

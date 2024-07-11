@@ -1,5 +1,6 @@
 "use client";
-import { Layout, theme } from "antd";
+import { Flex, Layout, theme } from "antd";
+import { GithubOutlined } from "@ant-design/icons";
 
 const { Header, Footer, Sider, Content } = Layout;
 const { useToken } = theme;
@@ -13,7 +14,12 @@ const AntDesignLayout: React.FC<AntDesignLayoutProps> = ({ children }) => {
     return (
         <Layout>
             <Header style={{ background: token.colorPrimary, color: token.colorBgBase }}>
-                <h1>Ant Design Theme Playground</h1>
+                <Flex gap="small" justify="space-between" align="center" style={{ fontSize: "18px" }}>
+                    <h1>Ant Design Theme Playground</h1>
+                    <a href="https://github.com/iannerney/ant-design-theme-playground" style={{ color: token.colorBgBase }}>
+                        <GithubOutlined />
+                    </a>
+                </Flex>
             </Header>
             <Content style={{ background: token.colorBgBase }}>{children}</Content>
             <Footer>© {year === 2024 ? year : `2024-${year}`} Ian Nerney</Footer>

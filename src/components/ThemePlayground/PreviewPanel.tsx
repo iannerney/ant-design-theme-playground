@@ -17,11 +17,12 @@ interface PreviewPanelProps {
 
 const PreviewPanel: React.FC<PreviewPanelProps> = ({ customizableTheme }) => {
     return (
+        // NOTE: The Layout comonent is added to the theme to override the parent theme component definition
         <ConfigProvider theme={{ ...customizableTheme, components: { Layout: {} } }}>
             <Layout>
                 <Header style={{ display: "flex", alignItems: "center" }}>
-                    <div className="demo-logo" />
-                    <Menu theme="dark" mode="horizontal" defaultSelectedKeys={["2"]} items={items} style={{ flex: 1, minWidth: 0 }} />
+                    <img src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg" alt="logo" style={{ height: 32, marginRight: 16 }} />
+                    <Menu mode="horizontal" theme="dark" defaultSelectedKeys={["2"]} items={items} style={{ flex: 1, minWidth: 0 }} />
                 </Header>
                 <Content>
                     <section id="breadcrumbs">
