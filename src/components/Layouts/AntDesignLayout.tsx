@@ -22,7 +22,10 @@ const AntDesignLayout: React.FC<AntDesignLayoutProps> = ({ children }) => {
                 </Flex>
             </Header>
             <Content style={{ background: token.colorBgBase }}>{children}</Content>
-            <Footer>© {year === 2024 ? year : `2024-${year}`} Ian Nerney</Footer>
+            <Footer>
+                © {year === 2024 ? year : `2024-${year}`} Ian Nerney, Courtney Newcomer, Brent Bautista, and{" "}
+                <a href="https://github.com/iannerney/ant-design-theme-playground">other contributors</a>
+            </Footer>
         </Layout>
     );
 };
