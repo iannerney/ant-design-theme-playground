@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { Form, Row, Col, ColorPicker, Input, InputNumber, Switch, ThemeConfig, Typography } from "antd";
+import { Form, Row, Col, ColorPicker, Input, InputNumber, Select, Switch, ThemeConfig, Typography } from "antd";
 import type { SeedToken } from "antd/es/theme/internal";
 import type { ColorFactory } from "antd/es/color-picker/color";
 
@@ -101,7 +101,56 @@ const SeedTokensForm: React.FC<SeedTokensFormProps> = ({ customizableTheme, setC
                         const renderFormItem = () => {
                             if (type === "string") {
                                 if (value?.toString().startsWith("#") || property.startsWith("color")) {
+                                    // If color, display color picker
                                     return <ColorPicker defaultValue={value as string} defaultFormat="hex" format="hex" showText disabledAlpha />;
+                                } else if (property === "fontFamily") {
+                                    // If font family, display font family selection
+                                    return (
+                                        <Select
+                                            defaultValue="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol','Noto Color Emoji'"
+                                            options={[
+                                                {
+                                                    value: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol','Noto Color Emoji'",
+                                                    label: "System Font",
+                                                },
+                                                { value: "var(--font-inter)", label: "Inter" },
+                                                { value: "var(--font-lato)", label: "Lato" },
+                                                { value: "var(--font-montserrat)", label: "Montserrat" },
+                                                { value: "var(--font-open-sans)", label: "Open Sans" },
+                                                { value: "var(--font-oswald)", label: "Oswald" },
+                                                { value: "var(--font-playfair)", label: "Playfair Display" },
+                                                { value: "var(--font-poppins)", label: "Poppins" },
+                                                { value: "var(--font-raleway)", label: "Raleway" },
+                                                { value: "var(--font-roboto)", label: "Roboto" },
+                                                { value: "var(--font-source-sans-pro)", label: "Source Sans Pro" },
+                                            ]}
+                                        />
+                                    );
+                                } else if (property === "fontFamilyCode") {
+                                    return (
+                                        <Select
+                                            defaultValue="'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace"
+                                            options={[
+                                                {
+                                                    value: "'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace",
+                                                    label: "System Font",
+                                                },
+                                                { value: "var(--font-source-code-pro)", label: "Source Code Pro" },
+                                                { value: "var(--font-ubuntu)", label: "Ubuntu" },
+                                            ]}
+                                        />
+                                    );
+                                } else if (property === "lineType") {
+                                    return (
+                                        <Select
+                                            defaultValue="solid"
+                                            options={[
+                                                { value: "solid", label: "Solid" },
+                                                { value: "dashed", label: "Dashed" },
+                                                { value: "dotted", label: "Dotted" },
+                                            ]}
+                                        />
+                                    );
                                 } else {
                                     return <Input defaultValue={value as string} />;
                                 }
