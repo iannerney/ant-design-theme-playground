@@ -1,13 +1,11 @@
 "use client";
-import React, { useState } from "react";
-import { Typography, Collapse } from "antd";
+import React, { useEffect } from "react";
+import { Typography, Collapse, theme } from "antd";
+import { AlgorithmModal, AlgorithmForm, SeedTokensForm, SeedTokensModal, MapTokensPanel, MapTokensModal, AliasTokensPanel, AliasTokensModal } from "./";
 import type { CollapseProps, ThemeConfig } from "antd";
-import SeedTokensForm from "./SeedTokensForm";
-import AlgorithmForm from "./AlgorithmForm";
-import SeedTokensModal from "./SeedTokensModal";
-import AlgorithmModal from "./AlgorithmModal";
 
 const { Title } = Typography;
+const { getDesignToken } = theme;
 
 interface CustomizeThemeSectionProps {
     customizableTheme: ThemeConfig;
@@ -18,6 +16,12 @@ const CustomizeThemeSection: React.FC<CustomizeThemeSectionProps> = ({ customiza
     const text = `
     Content coming soon...
     `;
+
+    let designTokens = getDesignToken(customizableTheme);
+
+    useEffect(() => {
+        designTokens = getDesignToken(customizableTheme);
+    }, [customizableTheme]);
 
     const sections: CollapseProps["items"] = [
         {
@@ -35,12 +39,14 @@ const CustomizeThemeSection: React.FC<CustomizeThemeSectionProps> = ({ customiza
         {
             key: "3",
             label: "Map Tokens",
-            children: <p>{text}</p>,
+            children: <MapTokensPanel designTokens={undefined} />, // TODO: Get data for map tokens
+            extra: <MapTokensModal />,
         },
         {
             key: "4",
             label: "Alias Tokens",
-            children: <p>{text}</p>,
+            children: <AliasTokensPanel designTokens={designTokens} />,
+            extra: <AliasTokensModal />,
         },
         {
             key: "5",

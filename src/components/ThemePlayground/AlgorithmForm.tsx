@@ -21,9 +21,7 @@ const switches = [
 ];
 
 const AlgorithmForm: React.FC<AlgorithmFormProps> = ({ customizableTheme, setCustomizableTheme }) => {
-    console.log(customizableTheme);
     const handleOnValuesChange = (changedValues: any, allValues: any) => {
-        console.log(changedValues, allValues);
         let algorithmArray: MappingAlgorithm[] = [];
 
         // If darkAlgorithm is true, use the darkAlgorithm from the theme, otherwise use the defaultAlgorithm
@@ -37,8 +35,6 @@ const AlgorithmForm: React.FC<AlgorithmFormProps> = ({ customizableTheme, setCus
         if (allValues.compactAlgorithm) {
             algorithmArray.push(theme.compactAlgorithm);
         }
-
-        console.log(algorithmArray);
 
         setCustomizableTheme({
             ...customizableTheme,

@@ -1,8 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import AntDesignLayout from "@/components/Layouts/AntDesignLayout";
-import CustomizeThemeSection from "@/components/ThemePlayground/CustomizeThemeSection";
-import PreviewResult from "@/components/ThemePlayground/PreviewResult";
+import { CustomizeThemeSection, PreviewResult } from "@/components/ThemePlayground";
 import { Col, Row, theme } from "antd";
 import type { ThemeConfig } from "antd";
 

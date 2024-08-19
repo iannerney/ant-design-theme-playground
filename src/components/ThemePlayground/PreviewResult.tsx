@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
+import React from "react";
 import { ThemeConfig, Typography } from "antd";
 import PreviewPanel from "./PreviewPanel";
 
@@ -10,9 +10,6 @@ interface PreviewResultProps {
 }
 
 const PreviewResult: React.FC<PreviewResultProps> = ({ customizableTheme }) => {
-    useEffect(() => {
-        console.log("customizableTheme", customizableTheme);
-    }, [customizableTheme]);
     return (
         <div>
             <Title level={2}>Preview the Result</Title>
