@@ -19,6 +19,7 @@ import {
     notification,
     Tag,
     Image,
+    message,
 } from "antd";
 import { ArrowDownOutlined, ArrowUpOutlined, QuestionCircleOutlined } from "@ant-design/icons";
 import type { ComponentTokenMap } from "antd/es/theme/interface";
@@ -48,13 +49,22 @@ const PreviewPanel: React.FC<PreviewPanelProps> = ({ customizableTheme, layoutCo
         setIsModalOpen(false);
     };
 
-    const [api, contextHolder] = notification.useNotification();
+    const [api, notificationContextHolder] = notification.useNotification();
 
     const openNotificationWithIcon = (type: NotificationType) => {
         api[type]({
             message: "Notification Title",
             description:
                 "This is the content of the notification. This is the content of the notification. This is the content of the notification.",
+        });
+    };
+
+    const [messageApi, messageContextHolder] = message.useMessage();
+
+    const success = () => {
+        messageApi.open({
+            type: "success",
+            content: "Okay, let's go!",
         });
     };
 
@@ -94,7 +104,10 @@ const PreviewPanel: React.FC<PreviewPanelProps> = ({ customizableTheme, layoutCo
                                     set using the <code>colorLink</code> property.
                                 </Paragraph>
                                 <Flex gap="small" wrap>
-                                    <Button size="large">Let's Go!</Button>
+                                    {messageContextHolder}
+                                    <Button size="large" onClick={success}>
+                                        Let's Go!
+                                    </Button>
                                     <Button type="primary" size="large" onClick={handleModalOpen}>
                                         Let's GOOOOO!
                                     </Button>
@@ -179,7 +192,7 @@ const PreviewPanel: React.FC<PreviewPanelProps> = ({ customizableTheme, layoutCo
                     </section>
                     <section id="notifications">
                         <Title level={2}>Notifications</Title>
-                        {contextHolder}
+                        {notificationContextHolder}
                         <Space>
                             <Button onClick={() => openNotificationWithIcon("success")}>Success</Button>
                             <Button onClick={() => openNotificationWithIcon("info")}>Info</Button>
@@ -215,10 +228,13 @@ const PreviewPanel: React.FC<PreviewPanelProps> = ({ customizableTheme, layoutCo
                 </Content>
                 <Footer style={{ textAlign: "center" }}>©{new Date().getFullYear()} Your Name</Footer>
             </Layout>
-            <Modal title="Basic Modal" open={isModalOpen} onOk={handleModalClose} onCancel={handleModalClose}>
-                <p>Some contents...</p>
-                <p>Some contents...</p>
-                <p>Some contents...</p>
+            <Modal
+                title="Big, emphatic, LET'S GOOOOOOO!!!"
+                open={isModalOpen}
+                onOk={handleModalClose}
+                onCancel={handleModalClose}
+            >
+                <p>Aren't modals cool?</p>
             </Modal>
         </ConfigProvider>
     );
