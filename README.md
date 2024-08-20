@@ -9,7 +9,7 @@ This project was created as a demo for the 2024 RE:CREATE conference at Clark & 
 This is a [Next.js](https://nextjs.org) site with the Ant Design library installed. To install and run the project...
 
 ```bash
-npm install && run dev
+npm install && npm run dev
 # or
 yarn install && yarn dev
 ```
