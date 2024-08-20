@@ -2,6 +2,8 @@ import AlgorithmForm from "./AlgorithmForm";
 import AlgorithmModal from "./AlgorithmModal";
 import AliasTokensModal from "./AliasTokensModal";
 import AliasTokensPanel from "./AliasTokensPanel";
+import ComponentForm from "./ComponentForm";
+import ComponentModal from "./ComponentModal";
 import CustomizeThemeSection from "./CustomizeThemeSection";
 import MapTokensModal from "./MapTokensModal";
 import MapTokensPanel from "./MapTokensPanel";
@@ -15,6 +17,8 @@ export {
     AlgorithmModal,
     AliasTokensModal,
     AliasTokensPanel,
+    ComponentForm,
+    ComponentModal,
     CustomizeThemeSection,
     MapTokensModal,
     MapTokensPanel,

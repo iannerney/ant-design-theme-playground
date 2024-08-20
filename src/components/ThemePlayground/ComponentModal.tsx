@@ -4,11 +4,11 @@ import { Typography, Modal } from "antd";
 
 const { Link, Paragraph } = Typography;
 
-interface MapTokensModalProps {
+interface ComponentTokensModalProps {
     // Add any props you need for the component here
 }
 
-const MapTokensModal: React.FC<MapTokensModalProps> = (props) => {
+const ComponentTokensModal: React.FC<ComponentTokensModalProps> = (props) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const showModal = () => {
@@ -21,22 +21,22 @@ const MapTokensModal: React.FC<MapTokensModalProps> = (props) => {
 
     return (
         <>
-            <Link onClick={showModal}>What are Map Tokens?</Link>
+            <Link onClick={showModal}>What are Component Tokens?</Link>
             <Modal
-                title="What are Map Tokens?"
+                title="What are Component Tokens?"
                 open={isModalOpen}
                 onOk={handleClose}
                 onCancel={handleClose}
                 cancelButtonProps={{ style: { display: "none" } }}
             >
                 <Paragraph>
-                    Map tokens are variables that define the design-related properties (e.g., colors, typography,
-                    spacing) used throughout the UI. They enable consistent theming and styling across components by
-                    centralizing these design values.
+                    Component tokens in Ant Design are design variables specific to individual components. They control
+                    component-specific styles like padding, borders, and font sizes, enabling fine-grained customization
+                    while ensuring consistency across the UI.
                 </Paragraph>
             </Modal>
         </>
     );
 };
 
-export default MapTokensModal;
+export default ComponentTokensModal;
