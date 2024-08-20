@@ -11,6 +11,7 @@ import PreviewPanel from "./PreviewPanel";
 import PreviewResult from "./PreviewResult";
 import SeedTokensForm from "./SeedTokensForm";
 import SeedTokensModal from "./SeedTokensModal";
+import TokensDisplayTable from "./TokensDisplayTable";
 
 export {
     AlgorithmForm,
@@ -26,4 +27,5 @@ export {
     PreviewResult,
     SeedTokensForm,
     SeedTokensModal,
+    TokensDisplayTable,
 };

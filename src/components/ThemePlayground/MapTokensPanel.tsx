@@ -1,6 +1,7 @@
 import React from "react";
 import type { MapToken, AliasToken } from "antd/es/theme/interface";
 import { ThemeConfig, theme, Table } from "antd";
+import TokensDisplayTable from "./TokensDisplayTable";
 
 interface MapTokensPanelProps {
     customizableTheme: ThemeConfig;
@@ -114,43 +115,15 @@ const MapTokensPanel: React.FC<MapTokensPanelProps> = ({ customizableTheme, desi
         sizeXXS: undefined,
     };
 
-    const dataSource = Object.entries(designTokens)
+    const tokens = Object.entries(designTokens)
         .filter(([key]) => key in mapTokenProperties)
         .map(([key, value]) => ({
             key,
             value,
-            isDifferent: defaultDesignTokens[key as keyof MapToken] !== value,
+            hasChanged: defaultDesignTokens[key as keyof MapToken] !== value,
         }));
 
-    const columns = [
-        {
-            title: "Token",
-            dataIndex: "key",
-            key: "key",
-        },
-        {
-            title: "Value",
-            dataIndex: "value",
-            key: "value",
-        },
-        {
-            title: "hasChanged",
-            dataIndex: "isDifferent",
-            key: "isDifferent",
-            render: (isDifferent: boolean) => (isDifferent ? "true" : "false"),
-        },
-    ];
-
-    return (
-        <Table
-            dataSource={dataSource}
-            columns={columns}
-            rowClassName={(record) => (record.isDifferent ? `bg-blue-200` : "")}
-            rowHoverable={false}
-            pagination={{ showTotal: (total, range) => `${range[0]}-${range[1]} of ${total} items` }}
-            scroll={{ x: true }}
-        />
-    );
+    return <TokensDisplayTable tokens={tokens} />;
 };
 
 export default MapTokensPanel;

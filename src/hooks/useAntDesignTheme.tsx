@@ -8,6 +8,7 @@ const useAntDesignTheme = () => {
         token: {
             colorPrimary: "#328677", // Clark Green
             colorBgBase: "#ffffff", // White
+            colorLink: "#328677", // Clark Green
         },
 
         // Preset Algorithms: https://ant.design/docs/react/customize-theme#use-preset-algorithms
