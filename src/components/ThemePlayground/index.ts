@@ -5,6 +5,7 @@ import AliasTokensPanel from "./AliasTokensPanel";
 import ComponentForm from "./ComponentForm";
 import ComponentModal from "./ComponentModal";
 import CustomizeThemeSection from "./CustomizeThemeSection";
+import InfoModal from "./InfoModal";
 import MapTokensModal from "./MapTokensModal";
 import MapTokensPanel from "./MapTokensPanel";
 import PreviewPanel from "./PreviewPanel";
@@ -21,6 +22,7 @@ export {
     ComponentForm,
     ComponentModal,
     CustomizeThemeSection,
+    InfoModal,
     MapTokensModal,
     MapTokensPanel,
     PreviewPanel,
