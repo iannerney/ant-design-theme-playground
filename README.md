@@ -1,4 +1,4 @@
-# Ant Design Theme Playground
+# Ant Design Theme Playground 🛝
 
 This project was created as a demo for the 2024 RE:CREATE conference at Clark & Associates. This playground is intended to show to the power of theming in AntD v5, and provide some code examples on how themes can be implemented.
 
