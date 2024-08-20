@@ -42,7 +42,7 @@ const TokensDisplayTable: React.FC<TokensDisplayTableProps> = ({ tokens }) => {
         <Table
             dataSource={tokens}
             columns={columns}
-            rowClassName={(record) => (record.hasChanged ? `bg-clark-green-100` : "")}
+            rowClassName={(record) => (record.hasChanged ? `bg-green-50` : "")}
             rowHoverable={false}
             pagination={{ showTotal: (total, range) => `${range[0]}-${range[1]} of ${total} items` }}
             scroll={{ x: true }}
