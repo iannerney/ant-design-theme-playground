@@ -1,33 +1,15 @@
-"use client";
-import React, { useState } from "react";
-import AntDesignLayout from "@/components/Layouts/AntDesignLayout";
-import { CustomizeThemeSection, PreviewResult } from "@/components/ThemePlayground";
-import { Col, Row, theme } from "antd";
-import type { ThemeConfig } from "antd";
+import React from "react";
+import Home from "./Home";
+import type { Metadata } from "next";
 
-// export const metadata: Metadata = {
-//     title: "Ant Design Theme Playground",
-//     description: "This project lets you configure and generate a custom Ant Design theme.",
-// };
-
-const Home: React.FC = () => {
-    const [customizableTheme, setCustomizableTheme] = useState<ThemeConfig>(theme.defaultConfig);
-
-    return (
-        <AntDesignLayout>
-            <Row style={{ padding: "24px 0" }}>
-                <Col style={{ padding: "24px" }} xs={24} md={12}>
-                    <CustomizeThemeSection
-                        customizableTheme={customizableTheme}
-                        setCustomizableTheme={setCustomizableTheme}
-                    />
-                </Col>
-                <Col style={{ padding: "24px" }} xs={24} md={12}>
-                    <PreviewResult customizableTheme={customizableTheme} />
-                </Col>
-            </Row>
-        </AntDesignLayout>
-    );
+export const metadata: Metadata = {
+    title: "Ant Design Theme Playground",
+    description:
+        "This project is a playground for theming in AntD v5, and provides some code examples on how themes can be implemented.",
 };
 
-export default Home;
+const HomePage: React.FC = () => {
+    return <Home />;
+};
+
+export default HomePage;
