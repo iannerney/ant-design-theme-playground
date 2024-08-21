@@ -22,16 +22,9 @@ const { getDesignToken } = theme;
 interface CustomizeThemeSectionProps {
     customizableTheme: ThemeConfig;
     setCustomizableTheme: React.Dispatch<React.SetStateAction<ThemeConfig>>;
-    layoutComponentToken: ComponentTokenMap["Layout"];
-    setLayoutComponentToken: React.Dispatch<React.SetStateAction<ComponentTokenMap["Layout"]>>;
 }
 
-const CustomizeThemeSection: React.FC<CustomizeThemeSectionProps> = ({
-    customizableTheme,
-    setCustomizableTheme,
-    layoutComponentToken,
-    setLayoutComponentToken,
-}) => {
+const CustomizeThemeSection: React.FC<CustomizeThemeSectionProps> = ({ customizableTheme, setCustomizableTheme }) => {
     const defaultDesignTokens = getDesignToken(theme.defaultConfig);
     let designTokens = getDesignToken(customizableTheme);
 

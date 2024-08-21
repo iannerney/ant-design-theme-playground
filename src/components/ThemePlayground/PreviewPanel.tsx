@@ -22,7 +22,6 @@ import {
     message,
 } from "antd";
 import { ArrowDownOutlined, ArrowUpOutlined, QuestionCircleOutlined } from "@ant-design/icons";
-import type { ComponentTokenMap } from "antd/es/theme/interface";
 
 const { Header, Content, Footer } = Layout;
 const { Title, Paragraph } = Typography;
@@ -35,10 +34,9 @@ const items = new Array(4).fill(null).map((_, index) => ({
 
 interface PreviewPanelProps {
     customizableTheme: any;
-    layoutComponentToken: ComponentTokenMap["Layout"];
 }
 
-const PreviewPanel: React.FC<PreviewPanelProps> = ({ customizableTheme, layoutComponentToken }) => {
+const PreviewPanel: React.FC<PreviewPanelProps> = ({ customizableTheme }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const handleModalOpen = () => {
@@ -69,8 +67,8 @@ const PreviewPanel: React.FC<PreviewPanelProps> = ({ customizableTheme, layoutCo
     };
 
     return (
-        // NOTE: The Layout comonent is added to the theme to override the parent theme component definition
-        <ConfigProvider theme={{ ...customizableTheme, components: { Layout: layoutComponentToken || {} } }}>
+        // NOTE: This config provider is a child theme, so it will also inherit the parent theme tokens.
+        <ConfigProvider theme={{ ...customizableTheme, components: {} }}>
             <Layout>
                 <Header style={{ display: "flex", alignItems: "center" }}>
                     <img
