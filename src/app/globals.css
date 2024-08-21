@@ -6,17 +6,9 @@
     padding: 16px 48px;
 }
 
-.ant-layout-content .ant-row {
-    padding: 24px 26px;
-}
-
 @media screen and (max-width: 768px) {
     .ant-layout-header {
         padding: 0 24px !important;
-    }
-
-    .ant-layout-content .ant-row {
-        padding: 24px 0;
     }
 
     .ant-layout-footer {
