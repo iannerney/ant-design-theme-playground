@@ -6,9 +6,17 @@
     padding: 16px 48px;
 }
 
+.home__row {
+    padding: 24px 26px;
+}
+
 @media screen and (max-width: 768px) {
     .ant-layout-header {
         padding: 0 24px !important;
+    }
+
+    .home__row {
+        padding: 24px 0;
     }
 
     .ant-layout-footer {
