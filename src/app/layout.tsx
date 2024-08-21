@@ -1,5 +1,17 @@
 "use client";
-import { Inter, Lato, Montserrat, Open_Sans, Playfair_Display, Poppins, Raleway, Roboto, Source_Sans_3, Source_Code_Pro, Ubuntu } from "next/font/google";
+import {
+    Inter,
+    Lato,
+    Montserrat,
+    Open_Sans,
+    Playfair_Display,
+    Poppins,
+    Raleway,
+    Roboto,
+    Source_Sans_3,
+    Source_Code_Pro,
+    Ubuntu,
+} from "next/font/google";
 import "./globals.css";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 import { ConfigProvider } from "antd";
@@ -22,13 +34,13 @@ export default function RootLayout({
 }: Readonly<{
     children: React.ReactNode;
 }>) {
-    const { initialTheme } = useAntDesignTheme();
+    const { parentTheme } = useAntDesignTheme();
     return (
         <html lang="en">
             <body
                 className={`${inter.variable} ${lato.variable} ${montserrat.variable} ${openSans.variable} ${playfair.variable} ${poppins.variable} ${raleway.variable} ${roboto.variable} ${sourceCodePro.variable} ${sourceSansPro.variable} ${ubuntu.variable}`}
             >
-                <ConfigProvider theme={initialTheme}>
+                <ConfigProvider theme={parentTheme}>
                     <AntdRegistry>{children}</AntdRegistry>
                 </ConfigProvider>
             </body>

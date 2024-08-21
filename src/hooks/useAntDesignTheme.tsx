@@ -2,7 +2,7 @@
 import { ThemeConfig, theme } from "antd";
 
 const useAntDesignTheme = () => {
-    const initialTheme: ThemeConfig = {
+    const parentTheme: ThemeConfig = {
         // Design Tokens: https://ant.design/docs/react/customize-theme#customize-design-token
         // Seed Tokens: https://ant.design/docs/react/customize-theme#seedtoken
         token: {
@@ -19,7 +19,7 @@ const useAntDesignTheme = () => {
     };
 
     return {
-        initialTheme,
+        parentTheme,
     };
 };
 
